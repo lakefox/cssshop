@@ -4,7 +4,7 @@ if (artboards.length == 0) {
   artboards.push({});
 }
 
-var canvas = artboards[artboards.length-1];
+var canvas = artboards[0];
 
 function renderABS() {
   document.querySelector("#artboard_select").innerHTML = "";

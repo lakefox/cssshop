@@ -196,7 +196,7 @@ function updateHTML(e) {
 }
 
 function renderMenu() {
-
+  document.querySelector("#element_selector").innerHTML = "";
   for (var el in canvas) {
     if (canvas.hasOwnProperty(el)) {
       let op = document.createElement("option");

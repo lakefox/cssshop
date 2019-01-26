@@ -8,6 +8,13 @@
     <link href='https://cdn.jsdelivr.net/npm/boxicons@1.9.1/css/boxicons.min.css' rel='stylesheet'>
   </head>
   <body>
+    <div class="artboards">
+      <select id="artboard_select" onchange="changeArtBoard(this)">
+      </select>
+      &nbsp;
+      <i class='bx bx-layer' title="Remove Artboard" onclick="removeArtBoard()"></i>
+      <i class='bx bxs-layer' title="Add Artboard" onclick="addArtBoard()"></i>
+    </div>
     <div class="zoom">
       <i class='bx bx-zoom-out' onclick="zoomOut()"></i>
       <i class='bx bx-zoom-in' onclick="zoomIn()"></i>
@@ -216,7 +223,19 @@
         </div>
 
         <div class="option">
-          <i class='bx bx-strikethrough icon_img txt_effects' onclick="button(this)" title="Strikethrough"></i>
+          <i class='bx bxs-color-fill icon_img'></i>
+          <div class="inputs">
+            <div class="input">
+              <div class="input_label">
+                Effects Color
+              </div>
+              <input type="color" id="text_decoration_color" onchange="update(this)">
+            </div>
+          </div>
+        </div>
+
+        <div class="option">
+          <i class='bx bx-strikethrough icon_img txt_effects' onclick="button(this)" title="Line-Through"></i>
           <i class='bx bx-underline icon_img txt_effects' onclick="button(this)" title="Underline"></i>
           <i class='bx bx-bold icon_img txt_effects' onclick="button(this)" title="Bold"></i>
           <i class='bx bx-text bx-rotate-10 icon_img txt_effects' onclick="button(this)" title="Italic"></i>
@@ -396,7 +415,7 @@
 
         <div class="option">
           <i class='bx bx-download icon_img txt_effects' id="download" title="Download Image"></i>
-          <i class='bx bx-download icon_img txt_effects' id="download_file" title="Download File"></i>
+          <i class='bx bx-download icon_img txt_effects' id="download_file" title="Download File" onclick="download_file()"></i>
         </div>
 
       </div>
@@ -406,6 +425,7 @@
     </div>
     <script src="http://html2canvas.hertzen.com/dist/html2canvas.min.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.2/randomColor.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
     <script src="./js/index.js" charset="utf-8"></script>
   </body>
 </html>

@@ -283,15 +283,6 @@ document.querySelector("#download").addEventListener("mousedown", () => {
     document.querySelector("#canvas").style.background = `url("../assets/transp_bg.png")`;
     document.querySelector("#canvas").style.transform = `scale(${zoom})`;
 
-    var canvas = document.createElement("canvas");
-    image = new MarvinImage();
-    image.load("https://i.imgur.com/UuvzbLx.png", imageLoaded);
-
-    function imageLoaded(){
-    	image.setColorToAlpha(0, 0);
-    	image.draw(canvas);
-    }
-
     let name = Math.floor(Math.random()*1000000);
 
     let a = document.createElement("a");

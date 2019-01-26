@@ -203,9 +203,11 @@ function renderMenu() {
       op.value = el;
       op.innerHTML = el;
       document.querySelector("#element_selector").appendChild(op);
+      if (el == id) {
+        document.querySelector("#element_selector").selectedIndex = document.querySelector("#element_selector").options.length-1;
+      }
     }
   }
-  document.querySelector("#element_selector").selectedIndex = document.querySelector("#element_selector").options.length-1;
   if (id) {
     document.querySelector("#rename_element").value = id;
     for (var style in el_default) {

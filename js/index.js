@@ -210,7 +210,7 @@ function renderMenu() {
   }
   if (id) {
     document.querySelector("#rename_element").value = id;
-    document.querySelector("#innerHTML").innerHTML = canvas[id].innerHTML || "";
+    document.querySelector("#innerHTML").value = canvas[id].innerHTML || "";
     for (var style in el_default) {
       if (el_default.hasOwnProperty(style)) {
         document.querySelector(`#${style}`).value = canvas[id][style] || el_default[style];
@@ -351,6 +351,7 @@ function loadFont() {
 }
 
 if (Object.keys(canvas)[0]) {
+  console.log("init rendering");
   id = Object.keys(canvas)[0];
   renderMenu();
   renderCanvas();

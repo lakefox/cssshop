@@ -1,4 +1,4 @@
-const artboards = JSON.parse(localStorage.artboards || "[]");
+var artboards = JSON.parse(localStorage.artboards || "[]");
 
 if (artboards.length == 0) {
   artboards.push({});
@@ -312,7 +312,7 @@ function zoomOut() {
 
 function download_file() {
   let filename = Math.floor(Math.random()*1000000);
-  let text = JSON.stringify(canvas);
+  let text = JSON.stringify(artboards);
   var element = document.createElement('a');
   element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
   element.setAttribute('download', filename+".csp");
@@ -342,6 +342,22 @@ function loadFont() {
     }
   }
 }
+
+function openFile(event) {
+  var input = event.target;
+
+  var reader = new FileReader();
+  reader.onload = function(){
+    var text = reader.result;
+    artboards = JSON.parse(text);
+    canvas = artboards[0];
+    id = Object.keys(canvas)[0];
+    renderMenu();
+    renderCanvas();
+    renderABS();
+  };
+  reader.readAsText(input.files[0]);
+};
 
 if (Object.keys(canvas)[0]) {
   console.log("init rendering");

@@ -276,22 +276,24 @@ document.querySelector("#download").addEventListener("mousedown", () => {
   while (bad_colors.indexOf(bg) != -1) {
     bg = randomColor();
   }
-  console.log(bg);
   document.querySelector("#canvas").style.background = bg;
   document.querySelector("#canvas").style.transform = `scale(1)`;
-  html2canvas(document.querySelector("#canvas")).then(can => {
-    document.querySelector("#canvas").style.background = `url("../assets/transp_bg.png")`;
-    document.querySelector("#canvas").style.transform = `scale(${zoom})`;
+  domtoimage.toPng(document.querySelector("#canvas"))
+    .then(function (dataUrl) {
+        document.querySelector("#canvas").style.background = `url("../assets/transp_bg.png")`;
+        document.querySelector("#canvas").style.transform = `scale(${zoom})`;
 
-    let name = Math.floor(Math.random()*1000000);
+        let name = Math.floor(Math.random()*1000000);
 
-    let a = document.createElement("a");
-    let dt = can.toDataURL('image/png');
-    a.href = dt;
-    a.download = name+".png";
-    a.click();
-    alert(`convert ${name}.png -trim -transparent '${bg}' ${name}.png`);
-  });
+        let a = document.createElement("a");
+        a.href = dataUrl;
+        a.download = name+".png";
+        a.click();
+        alert(`convert ${name}.png -trim -transparent '${bg}' ${name}.png`);
+    })
+    .catch(function (error) {
+        console.error('oops, something went wrong!', error);
+    });
 });
 
 var zoom = 1;

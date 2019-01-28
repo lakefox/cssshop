@@ -114,7 +114,8 @@ const el_default = {
   "width": "100",
   "z_index": "0",
   "background_image": "",
-  "opacity": "1"
+  "opacity": "1",
+  "transform": ""
 }
 
 const postfixes = {

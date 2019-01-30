@@ -216,7 +216,11 @@ function renderMenu() {
     document.querySelector("#innerHTML").value = canvas[id].innerHTML || "";
     for (var style in el_default) {
       if (el_default.hasOwnProperty(style)) {
-        document.querySelector(`#${style}`).value = canvas[id][style] || el_default[style];
+        try {
+          document.querySelector(`#${style}`).value = canvas[id][style] || el_default[style];
+        } catch (e) {
+          console.log(e);
+        }
       }
     }
 
@@ -361,6 +365,25 @@ function openFile(event) {
   };
   reader.readAsText(input.files[0]);
 };
+
+
+function readImg() {
+  if (document.querySelector("#background_image").files && document.querySelector("#background_image").files[0]) {
+    var FR= new FileReader();
+    FR.addEventListener("load", function(e) {
+      console.log("Read");
+      canvas[id].background_image = e.target.result;
+      renderCanvas();
+    });
+    console.log("reading");
+    FR.readAsDataURL(document.querySelector("#background_image").files[0]);
+  }
+}
+
+function removeIMG() {
+  canvas[id].background_image = "";
+  renderCanvas();
+}
 
 if (Object.keys(canvas)[0]) {
   console.log("init rendering");

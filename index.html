@@ -326,7 +326,7 @@
               <div class="input_label">
                 Background Image
               </div>
-              <input type="text" placeholder="Enter Url" id="background_image" onchange="update(this)">
+              <input type="file" id="background_image" onchange="readImg()">
             </div>
           </div>
         </div>
@@ -335,6 +335,7 @@
           <i class='bx bx-repeat icon_img txt_effects' onclick="button(this)" title="Repeat"></i>
           <i class='bx bx-area icon_img txt_effects' onclick="button(this)" title="Cover"></i>
           <i class='bx bx-radio-circle-marked icon_img txt_effects' onclick="button(this)" title="Center​"></i>
+          <i class='bx bxs-x-square icon_img txt_effects' onclick="removeIMG()" title="Remove"></i>
         </div>
 
         <div class="option_head">

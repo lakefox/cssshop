@@ -63,13 +63,15 @@ function createEl() {
 function deleteEl() {
   let el_id = document.querySelector("#element_selector").value;
   delete canvas[el_id];
-  let op = document.querySelector(`option[value="${el_id}"]`)
-  document.querySelector("#element_selector").removeChild(op);
-  document.querySelector("#rename_element").value = "";
+  let op = document.querySelector(`option[value="${el_id}"]`);
+  if (op != null) {
+    document.querySelector("#element_selector").removeChild(op);
+    document.querySelector("#rename_element").value = "";
 
-  id = document.querySelector("#element_selector").value || undefined;
-  renderMenu();
-  renderCanvas();
+    id = document.querySelector("#element_selector").value || undefined;
+    renderMenu();
+    renderCanvas();
+  }
 }
 
 function renameEl() {

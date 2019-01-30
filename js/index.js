@@ -278,7 +278,7 @@ function renderCanvas() {
 }
 
 document.querySelector("#download").addEventListener("mousedown", () => {
-  let bad_colors = JSON.stringify(canvas).toLowerCase().match(/#[a-f0-9]{6}/g);
+  let bad_colors = JSON.stringify(canvas).toLowerCase().match(/#[a-f0-9]{6}/g) || [];
   var bg = randomColor();
   while (bad_colors.indexOf(bg) != -1) {
     bg = randomColor();

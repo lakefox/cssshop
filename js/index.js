@@ -201,7 +201,7 @@ function updateHTML(e) {
 function renderMenu() {
   document.querySelector("#element_selector").innerHTML = "";
   for (var el in canvas) {
-    if (canvas.hasOwnProperty(el)) {
+    if (canvas.hasOwnProperty(el) && el != "groups") {
       let op = document.createElement("option");
       op.value = el;
       op.innerHTML = el;

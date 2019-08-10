@@ -243,7 +243,7 @@ function renderCanvas() {
   let can = document.querySelector("#canvas");
   can.innerHTML = "";
 
-  for (var el in canvas) {
+  for (var el in canvas && el != "groups") {
     if (canvas.hasOwnProperty(el)) {
 
       let div = document.createElement("div");

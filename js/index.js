@@ -243,8 +243,8 @@ function renderCanvas() {
   let can = document.querySelector("#canvas");
   can.innerHTML = "";
 
-  for (var el in canvas && el != "groups") {
-    if (canvas.hasOwnProperty(el)) {
+  for (var el in canvas) {
+    if (canvas.hasOwnProperty(el) && el != "groups") {
 
       let div = document.createElement("div");
       div.style.position = "absolute";

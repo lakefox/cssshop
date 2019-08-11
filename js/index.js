@@ -1,5 +1,7 @@
 var artboards = JSON.parse(localStorage.artboards || "[]");
 
+let posCSP = false;
+
 if (artboards.length == 0) {
   artboards.push({});
 }
@@ -322,7 +324,11 @@ function download_file() {
   let text = JSON.stringify(artboards);
   var element = document.createElement('a');
   element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-  element.setAttribute('download', filename+".csp");
+  if (posCSP) {
+    element.setAttribute('download', filename+".pos.csp");
+  } else {
+    element.setAttribute('download', filename+".csp");
+  }
 
   element.style.display = 'none';
   document.body.appendChild(element);
@@ -356,7 +362,15 @@ function openFile(event) {
   var reader = new FileReader();
   reader.onload = function(){
     var text = reader.result;
-    artboards = JSON.parse(text);
+    let name = document.querySelector("input[type=file]").value;
+    if (name.indexOf(".pos.csp") > -1) {
+      storage = JSON.parse(text);
+      artboards = storage.None;
+      posCSP = true;
+    } else {
+      artboards = JSON.parse(text);
+      posCSP = false;
+    }
     canvas = artboards[0];
     id = Object.keys(canvas)[0];
     renderMenu();

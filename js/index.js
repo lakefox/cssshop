@@ -321,12 +321,17 @@ function zoomOut() {
 
 function download_file() {
   let filename = Math.floor(Math.random()*1000000);
-  let text = JSON.stringify(artboards);
-  var element = document.createElement('a');
-  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
   if (posCSP) {
+    let storage = JSON.parse(localStorage.storage);
+    storage.None = artboards;
+    let text = JSON.stringify(storage);
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
     element.setAttribute('download', filename+".pos.csp");
   } else {
+    let text = JSON.stringify(artboards);
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
     element.setAttribute('download', filename+".csp");
   }
 
@@ -366,6 +371,7 @@ function openFile(event) {
     if (name.indexOf(".pos.csp") > -1) {
       storage = JSON.parse(text);
       artboards = storage.None;
+      localStorage.storage = JSON.stringify(storage);
       posCSP = true;
     } else {
       artboards = JSON.parse(text);

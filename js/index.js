@@ -90,11 +90,11 @@ function renameEl() {
   id = new_key;
 }
 
-document.querySelector("#element_selector").addEventListener("click", () => {
+function changeElement() {
   id = document.querySelector("#element_selector").value;
   renderMenu();
   renderCanvas();
-});
+}
 
 const el_default = {
   "text_decoration_color": "#eeeeee",

@@ -411,3 +411,8 @@ if (Object.keys(canvas)[0]) {
   renderMenu();
   renderCanvas();
 }
+
+function delete() {
+  localStorage.artboardss = {};
+  window.reload();
+}

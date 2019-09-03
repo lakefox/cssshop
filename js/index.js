@@ -413,6 +413,6 @@ if (Object.keys(canvas)[0]) {
 }
 
 function deleteET() {
-  localStorage.artboards = "{}";
+  localStorage.artboards = "[]";
   window.location.reload();
 }

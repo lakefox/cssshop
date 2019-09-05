@@ -295,10 +295,11 @@ document.querySelector("#download").addEventListener("mousedown", () => {
         let name = Math.floor(Math.random()*1000000);
 
         let a = document.createElement("a");
-        a.href = dataUrl;
-        a.download = name+".png";
-        a.click();
-        alert(`convert ${name}.png -trim -transparent '${bg}' ${name}.png`);
+        cropImage(dataUrl, bg, function (data) {
+          a.href = data;
+          a.download = name+".png";
+          a.click();
+        });
     })
     .catch(function (error) {
         console.error('oops, something went wrong!', error);

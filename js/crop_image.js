@@ -24,7 +24,7 @@ function cropImage(dataUrl, color, cb) {
     }
     ctx.putImageData(colors,0,0);
     autoCropCanvas(canvas,ctx);
-    cb(canvas.toBlob("image/png"))
+    canvas.toBlob(cb,"image/png")
   };
   img.src = dataUrl;
 }

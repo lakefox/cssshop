@@ -296,7 +296,7 @@ document.querySelector("#download").addEventListener("mousedown", () => {
 
         let a = document.createElement("a");
         cropImage(dataUrl, bg, function (data) {
-          a.href = data;
+          a.href = URL.createObjectURL(data);
           a.download = name+".png";
           a.click();
         });

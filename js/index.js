@@ -202,14 +202,21 @@ function updateHTML(e) {
 
 function renderMenu() {
   document.querySelector("#element_selector").innerHTML = "";
+  document.querySelector("#copy_selector").innerHTML = "";
   for (var el in canvas) {
     if (canvas.hasOwnProperty(el) && el != "groups") {
       let op = document.createElement("option");
       op.value = el;
       op.innerHTML = el;
       document.querySelector("#element_selector").appendChild(op);
+
       if (el == id) {
         document.querySelector("#element_selector").selectedIndex = document.querySelector("#element_selector").options.length-1;
+      } else {
+        let op2 = document.createElement("option");
+        op2.value = el;
+        op2.innerHTML = el;
+        document.querySelector("#copy_selector").appendChild(op2);
       }
     }
   }
@@ -416,4 +423,12 @@ if (Object.keys(canvas)[0]) {
 function deleteET() {
   localStorage.artboards = "[]";
   window.location.reload();
+}
+
+function paste() {
+  let artboard = parseInt(document.querySelector("#artboard_select").value);
+  let es = parseInt(document.querySelector("#element_selector").value) || document.querySelector("#element_selector").value;
+  let cs = parseInt(document.querySelector("#copy_selector").value) || document.querySelector("#copy_selector").value;
+  artboards[artboard][es] = JSON.parse(JSON.stringify(artboards[artboard][cs]));
+  renderCanvas();
 }

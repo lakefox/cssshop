@@ -435,5 +435,10 @@ function paste() {
 
 function runCodeEditor() {
   let code = document.querySelector("#codeEditor").value;
+  localStorage.code = code;
   eval(code);
+}
+
+function loadCode() {
+  document.querySelector("#codeEditor").value = localStorage.code;
 }

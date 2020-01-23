@@ -432,3 +432,8 @@ function paste() {
   artboards[artboard][es] = JSON.parse(JSON.stringify(artboards[artboard][cs]));
   renderCanvas();
 }
+
+function runCodeEditor() {
+  let code = document.querySelector("#codeEditor").value;
+  eval(code);
+}

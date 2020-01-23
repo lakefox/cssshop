@@ -245,6 +245,7 @@ function renderMenu() {
     }
   }
   renderCanvas();
+  loadCode();
 }
 
 function renderCanvas() {
@@ -432,7 +433,6 @@ function paste() {
   artboards[artboard][es] = JSON.parse(JSON.stringify(artboards[artboard][cs]));
   renderCanvas();
 }
-
 function runCodeEditor() {
   let code = document.querySelector("#codeEditor").value;
   localStorage.code = code;
@@ -440,5 +440,7 @@ function runCodeEditor() {
 }
 
 function loadCode() {
-  document.querySelector("#codeEditor").value = localStorage.code;
+  if (document.querySelector("#codeEditor")) {
+    document.querySelector("#codeEditor").value = localStorage.code;
+  }
 }

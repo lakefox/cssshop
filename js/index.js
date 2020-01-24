@@ -245,7 +245,6 @@ function renderMenu() {
     }
   }
   renderCanvas();
-  loadCode();
 }
 
 function renderCanvas() {
@@ -285,6 +284,7 @@ function renderCanvas() {
     }
   }
   localStorage.artboards = JSON.stringify(artboards);
+  loadCode();
 }
 
 document.querySelector("#download").addEventListener("mousedown", () => {

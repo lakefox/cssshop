@@ -1,4 +1,5 @@
 var artboards = JSON.parse(localStorage.artboards || "[]");
+let code = "";
 
 let posCSP = false;
 
@@ -338,10 +339,12 @@ function download_file() {
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
     element.setAttribute('download', filename+".pos.csp");
   } else {
+    artboards.push(localStorage.code);
     let text = JSON.stringify(artboards);
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
     element.setAttribute('download', filename+".csp");
+    artboards.pop();
   }
 
   element.style.display = 'none';
@@ -352,7 +355,9 @@ function download_file() {
   document.body.removeChild(element);
 }
 
+let fonts = [];
 function loadFont() {
+  fonts = [];
   for (var el in canvas) {
     if (canvas.hasOwnProperty(el)) {
       if (canvas[el].font_family) {
@@ -362,6 +367,7 @@ function loadFont() {
               families: [canvas[el].font_family]
             }
           });
+          fonts.push(canvas[el].font_family.replace(/ /g,"+")+":"+(canvas[el].font_weight || 400));
         } catch (e) {
           let doesnothing = e;
         }
@@ -384,6 +390,9 @@ function openFile(event) {
       posCSP = true;
     } else {
       artboards = JSON.parse(text);
+      if (typeof artboards.slice(-1)[0] == "string") {
+        localStorage.code = artboards.pop();
+      }
       posCSP = false;
     }
     canvas = artboards[0];
@@ -443,4 +452,27 @@ function loadCode() {
   if (document.querySelector("#codeEditor")) {
     document.querySelector("#codeEditor").value = localStorage.code;
   }
+}
+
+function exportHTML() {
+  let canvas = document.querySelector("#canvas").innerHTML;
+  let html = `
+    <!DOCTYPE html>
+    <html lang="en" dir="ltr">
+      <head>
+        <meta charset="utf-8">
+        <title>CSS Shop Draw</title>
+        <link href="https://fonts.googleapis.com/css?family=${fonts.join("|")}&display=swap" rel="stylesheet">
+      </head>
+      <body>
+        ${canvas}
+        <script>${localStorage.code}</script>
+      </body>
+    </html>
+  `;
+  let filename = Math.floor(Math.random()*1000000);
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(html));
+  element.setAttribute('download', filename+".html");
+  element.click();
 }
